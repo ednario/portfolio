@@ -13,7 +13,7 @@ const NAV_ITEMS = [
   },
   {
     label: 'Projetos',
-    href: '/projetos',
+    href: '/',
   },
 ]
 function Header() {

@@ -3,6 +3,7 @@ import './globals.css'
 import { ReactNode } from 'react'
 
 import Header from './components/header'
+import ContactForm from './components/contact-form'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <Header />
         {children}
+        <ContactForm />
       </body>
     </html>
   )

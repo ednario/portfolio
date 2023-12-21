@@ -5,15 +5,21 @@ import { HiArrowNarrowRight } from 'react-icons/hi'
 import TechBadge from '@/app/components/tech-badge'
 import Link from '@/app/components/link'
 
-function ProjectCard() {
+import { Project } from '@/app/types/projects'
+
+type ProjectCardProps = {
+  project: Project
+}
+
+function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div className="flex gap-6 lg:gap-12 flex-col lg:flex-row">
       <div className="h-full w-full">
         <Image
           width={420}
           height={304}
-          src="/images/cloneingresso.com.png"
-          alt="clone ingresso.com"
+          src={project.thumbnail.url}
+          alt={project.title}
           className="w-full h-[200px] sm:h-[300px] lg:w-[420px] lg:min-h-full lg:object-cover rounded-lg"
         />
       </div>
@@ -26,24 +32,20 @@ function ProjectCard() {
             alt=""
             src="/images/icons/project-title-icon.svg"
           />
-          CloneIngresso.com
+          {project.title}
         </h3>
-        <p className="text-gray-400 my-6">
-          Projeto desenvolvido por mim durante um trabalho da faculdade sobre
-          desenvolvimento de aplicações web.
-        </p>
+        <p className="text-gray-400 my-6">{project.shortDescription}</p>
 
         <div className="flex gap-x-2 gap-y-3 flex-wrap mb-8 lg:max-w-[350px]">
-          <TechBadge name="Vite.js" />
-          <TechBadge name="Vite.js" />
-          <TechBadge name="Vite.js" />
-          <TechBadge name="Vite.js" />
-          <TechBadge name="Vite.js" />
-          <TechBadge name="Vite.js" />
-          <TechBadge name="Vite.js" />
+          {project.technologies.map((tech) => (
+            <TechBadge
+              key={`${project.title}-tech-${tech.name}`}
+              name={tech.name}
+            />
+          ))}
         </div>
 
-        <Link href="https://cloneingressocom.vercel.app/">
+        <Link href={project.slug}>
           Ver Projeto
           <HiArrowNarrowRight />
         </Link>

@@ -1,24 +1,22 @@
 import { SiExpress } from 'react-icons/si'
 
 import KnownTech from './known-tech'
+import { KnownTechs as IKnownTechs } from '@/app/types/projects'
 
 import SectionTitle from '@/app/components/section-title'
 
-function KnownTechs() {
+type KnownTechsProps = {
+  techs: IKnownTechs[]
+}
+
+function KnownTechs({ techs }: KnownTechsProps) {
   return (
     <section className="container py-16">
       <SectionTitle subtitle="competências" title="Conhecimentos" />
 
       <div className="grid grid-cols-[repeat(auto-fit,minmax(264px,1fr))] gap-3 mt-[60px]">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <KnownTech
-            key={index}
-            tech={{
-              icon: <SiExpress />,
-              name: 'Express.js',
-              startDate: '2021-03-01',
-            }}
-          />
+        {techs?.map((tech) => (
+          <KnownTech key={tech.name} tech={tech} />
         ))}
       </div>
     </section>

@@ -6,6 +6,10 @@ export type KnownTechs = {
   startDate: string
 }
 
+export type Technology = {
+  name: string
+}
+
 export type Project = {
   slug: string
   thumbnail: {

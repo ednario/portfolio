@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { HiArrowNarrowRight } from 'react-icons/hi'
 
 import TechBadge from '@/app/components/tech-badge'
-import Link from '@/app/components/link'
 
 import { Project } from '@/app/types/projects'
 
@@ -45,10 +44,10 @@ function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
 
-        <Link href={project.slug}>
+        <a href={project.slug}>
           Ver Projeto
           <HiArrowNarrowRight />
-        </Link>
+        </a>
       </div>
     </div>
   )

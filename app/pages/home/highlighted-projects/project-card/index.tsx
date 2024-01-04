@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { HiArrowNarrowRight } from 'react-icons/hi'
 
 import TechBadge from '@/app/components/tech-badge'
+import Link from 'next/link'
 
 import { Project } from '@/app/types/projects'
 
@@ -44,10 +45,10 @@ function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
 
-        <a href={project.slug}>
+        <Link href={project.slug} className="flex items-center gap-1">
           Ver Projeto
           <HiArrowNarrowRight />
-        </a>
+        </Link>
       </div>
     </div>
   )

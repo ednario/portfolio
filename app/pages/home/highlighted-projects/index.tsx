@@ -15,7 +15,7 @@ function HighLightedProjects({ projects }: HighLightedProjectsProps) {
 
       <div>
         {projects?.map((project, index) => (
-          <div key={project.slug}>
+          <div key={project.slug} className="max-w-5xl mx-auto">
             <ProjectCard project={project} />
             <HorizontalDivider className="my-16" />
           </div>

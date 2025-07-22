@@ -13,8 +13,8 @@ type ProjectCardProps = {
 
 function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="flex gap-6 lg:gap-12 flex-col lg:flex-row">
-      <div className="h-full w-full">
+    <div className="flex gap-6 lg:gap-12 flex-col lg:flex-row items-center lg:items-stretch">
+      <div className="h-full w-full flex items-center justify-center">
         <Image
           width={420}
           height={304}
@@ -24,7 +24,7 @@ function ProjectCard({ project }: ProjectCardProps) {
         />
       </div>
 
-      <div>
+      <div className="flex flex-col justify-center lg:justify-center lg:h-full w-full">
         <h3 className="flex items-center gap-3 font-medium text-lg text-gray-50">
           <Image
             width={20}

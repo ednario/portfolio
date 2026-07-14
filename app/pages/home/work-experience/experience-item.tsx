@@ -64,9 +64,9 @@ function ExperienceItem({ experience }: ExperienceItemProps) {
           <span className="text-gray-500">
             {formattedStartDate} · {formattedEndDate} · ({formattedDuration})
           </span>
-          <p className="text-gray-400">
+          <div className="text-gray-400">
             <RichText content={experience.description.raw} />
-          </p>
+          </div>
         </div>
 
         <p className="text-gray-400 text-sm mb-3 mt-6 font-semibold">

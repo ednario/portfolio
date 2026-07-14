@@ -3,6 +3,7 @@ import ExperienceItem from './experience-item'
 import { WorkExperience as IWorkExperience } from '@/app/types/work-experience'
 
 import SectionTitle from '@/app/components/section-title'
+import Reveal from '@/app/components/reveal'
 
 type WorkExperienceProps = {
   experiences: IWorkExperience[]
@@ -10,24 +11,26 @@ type WorkExperienceProps = {
 
 function WorkExperience({ experiences }: WorkExperienceProps) {
   return (
-    <section className="container py-16 flex gap-10 md:gap-4 lg:gap-16 flex-col md:flex-row">
-      <div className="max-w-[420px]">
+    <section className="container py-20 flex gap-12 md:gap-8 lg:gap-16 flex-col md:flex-row">
+      <Reveal className="max-w-[420px] shrink-0">
         <SectionTitle
           subtitle="experiências"
           title="Experiência Profissional"
         />
-        <p className="flex flex-col gap-4">
-          Estou sempre aberto a novos desafios e projetos emocionantes. Vamos
-          trabalhat juntos e criar soluções incríveis para sua empresa!
+        <p className="mt-6 text-gray-400 leading-relaxed">
+          Estou sempre aberto a novos desafios e projetos. Vamos trabalhar
+          juntos e criar soluções sólidas para o seu produto.
         </p>
-      </div>
+      </Reveal>
 
-      <div className="flex flex-col gap-4">
-        {experiences.map((experience) => (
-          <ExperienceItem
+      <div className="flex flex-col gap-2 w-full">
+        {experiences.map((experience, index) => (
+          <Reveal
             key={experience.companyName}
-            experience={experience}
-          />
+            delay={Math.min(index * 0.08, 0.24)}
+          >
+            <ExperienceItem experience={experience} />
+          </Reveal>
         ))}
       </div>
     </section>

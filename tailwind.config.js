@@ -17,7 +17,17 @@ module.exports = {
         mono: ['var(--font-plex-mono)', 'monospace'],
       },
       boxShadow: {
-        button: '0px 0px 68px 7px rgba(5, 150, 105, 0.4)',
+        button: '0px 0px 48px 4px rgba(5, 150, 105, 0.35)',
+        photo: '0 24px 80px -20px rgba(0, 0, 0, 0.65)',
+      },
+      keyframes: {
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(16px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'fade-up': 'fade-up 0.7s ease-out both',
       },
     },
   },

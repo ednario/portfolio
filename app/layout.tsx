@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import './globals.css'
 
 import ContactForm from './components/contact-form'
+import AppToaster from './components/toaster'
 
 const inter = localFont({
   src: [
@@ -46,9 +47,10 @@ const plexMono = localFont({
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR" className={`${inter.variable} ${plexMono.variable}`}>
-      <body>
+      <body className="font-sans">
         {children}
         <ContactForm />
+        <AppToaster />
       </body>
     </html>
   )

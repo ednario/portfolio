@@ -16,7 +16,9 @@ async function fetchHygraphQuery(query: string, revalidate?: number) {
 
   if (json.errors?.length) {
     throw new Error(
-      `Hygraph: ${json.errors.map((error: { message: string }) => error.message).join(' | ')}`,
+      `Hygraph: ${json.errors
+        .map((error: { message: string }) => error.message)
+        .join(' | ')}`,
     )
   }
 

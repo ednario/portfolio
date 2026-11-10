@@ -20,7 +20,7 @@ function RichText({ ...props }: RichTextProps) {
         a: ({ children, ...props }) => (
           <a
             {...props}
-            className="hover:text-emerald-400 transition-colors underline"
+            className="hover:text-sky-400 transition-colors underline"
           >
             {children}
           </a>

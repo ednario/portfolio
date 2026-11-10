@@ -20,7 +20,7 @@ const contactFormSchema = z.object({
 type ContactFormData = z.infer<typeof contactFormSchema>
 
 const fieldClassName =
-  'w-full bg-gray-900/70 border border-gray-800 rounded-lg placeholder:text-gray-500 text-gray-50 p-4 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600/60 transition-colors'
+  'w-full bg-slate-900/70 border border-white/10 rounded-xl placeholder:text-slate-500 text-slate-100 p-4 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/40 backdrop-blur-md transition-all'
 
 function ContactForm() {
   const {
@@ -45,49 +45,53 @@ function ContactForm() {
   return (
     <section
       id="contato"
-      className="relative py-20 px-6 md:py-28 flex items-center justify-center overflow-hidden"
+      className="relative py-24 px-6 flex items-center justify-center overflow-hidden"
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(5,150,105,0.12),transparent_60%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.15),transparent_65%)]"
       />
 
-      <div className="relative w-full max-w-[420px] mx-auto">
+      <div className="relative w-full max-w-[460px] mx-auto">
         <SectionTitle
           subtitle="contato"
-          title="Vamos trabalhar juntos? Entre em contato"
+          title="Vamos trabalhar juntos?"
           className="items-center text-center [&>span:last-child]:mx-auto"
         />
+        <p className="text-slate-400 text-sm text-center mt-3">
+          Estou aberto a novas oportunidades e parcerias. Deixe uma mensagem abaixo!
+        </p>
+
         <form
-          className="mt-12 w-full flex flex-col gap-4"
+          className="mt-8 w-full flex flex-col gap-4"
           onSubmit={handleSubmit(onSubmit)}
         >
           <input
-            placeholder="Nome"
-            className={`${fieldClassName} h-14`}
+            placeholder="Seu nome"
+            className={`${fieldClassName} h-13`}
             {...register('name')}
           />
           <input
-            placeholder="E-mail"
+            placeholder="Seu melhor e-mail"
             type="email"
-            className={`${fieldClassName} h-14`}
+            className={`${fieldClassName} h-13`}
             {...register('email')}
           />
           <textarea
-            placeholder="Mensagem"
-            className={`${fieldClassName} resize-none h-[138px]`}
+            placeholder="Escreva sua mensagem..."
+            className={`${fieldClassName} resize-none h-[130px]`}
             {...register('message')}
             maxLength={500}
           />
 
-          <div className="relative w-max mx-auto mt-6">
-            <Button className="relative z-[2]" disabled={isSubmitting}>
-              {isSubmitting ? 'Enviando...' : 'Enviar mensagem'}
+          <div className="relative w-max mx-auto mt-4">
+            <Button size="lg" className="relative z-[2]" disabled={isSubmitting}>
+              <span>{isSubmitting ? 'Enviando...' : 'Enviar mensagem'}</span>
               <HiArrowNarrowRight size={18} />
             </Button>
             <div
               aria-hidden
-              className="absolute inset-0 bg-emerald-600 blur-2xl opacity-25"
+              className="absolute inset-0 bg-blue-500 blur-2xl opacity-35"
             />
           </div>
         </form>

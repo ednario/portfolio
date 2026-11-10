@@ -1,5 +1,4 @@
 import SectionTitle from '@/app/components/section-title'
-import HorizontalDivider from '@/app/components/divider/horizontal'
 import Reveal from '@/app/components/reveal'
 import ProjectCard from './project-card'
 import { Project } from '@/app/types/projects'
@@ -10,20 +9,19 @@ type HighLightedProjectsProps = {
 
 function HighLightedProjects({ projects }: HighLightedProjectsProps) {
   return (
-    <section className="container py-20">
-      <Reveal>
-        <SectionTitle subtitle="destaques" title="Projetos em destaque" />
+    <section id="projetos" className="container py-24 relative">
+      <Reveal className="mb-14">
+        <SectionTitle subtitle="portfólio" title="Projetos em Destaque" />
+        <p className="text-slate-400 text-sm max-w-lg mt-3">
+          Alguns dos projetos mais relevantes que desenvolvi, explorando arquitetura limpa, performance e escalabilidade.
+        </p>
       </Reveal>
-      <HorizontalDivider className="mb-14" />
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-10">
         {projects?.map((project, index) => (
-          <Reveal key={project.slug} delay={Math.min(index * 0.08, 0.24)}>
-            <div className="max-w-5xl mx-auto w-full">
-              <ProjectCard project={project} />
-              {index < projects.length - 1 && (
-                <HorizontalDivider className="my-14" />
-              )}
+          <Reveal key={project.slug} delay={Math.min(index * 0.1, 0.3)}>
+            <div className="w-full">
+              <ProjectCard project={project} index={index} />
             </div>
           </Reveal>
         ))}

@@ -1,11 +1,10 @@
 import Image from 'next/image'
-
 import { WorkExperience } from '@/app/types/work-experience'
-
 import TechBadge from '@/app/components/tech-badge'
 import RichText from '@/app/components/rich-text'
 import { differenceInMonths, differenceInYears, format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import { FiExternalLink, FiCalendar } from 'react-icons/fi'
 
 type ExperienceItemProps = {
   experience: WorkExperience
@@ -13,9 +12,9 @@ type ExperienceItemProps = {
 
 function ExperienceItem({ experience }: ExperienceItemProps) {
   const startDate = new Date(experience.startDate)
+  const isCurrent = !experience.endDate
 
   const formattedStartDate = format(startDate, 'MMM yyyy', { locale: ptBR })
-
   const formattedEndDate = experience.endDate
     ? format(new Date(experience.endDate), 'MMM yyyy', { locale: ptBR })
     : 'o momento'
@@ -36,51 +35,80 @@ function ExperienceItem({ experience }: ExperienceItemProps) {
       : `${months} mes${months > 1 ? 'es' : ''}`
 
   return (
-    <div className="grid grid-cols-[40px,1fr] gap-4 md:gap-8">
-      <div className="flex flex-col items-center gap-4">
-        <div className="rounded-full border border-emerald-800/60 p-0.5 bg-gray-900/80">
-          <Image
-            src={experience.companyLogo.url}
-            width={40}
-            height={40}
-            className="rounded-full"
-            alt={experience.companyName}
-          />
-        </div>
-        <div className="h-full w-px bg-gradient-to-b from-emerald-700/60 via-gray-800 to-transparent" />
+    <div className="relative pl-7 sm:pl-12 pb-10 last:pb-2 group">
+      {/* Vertical Timeline Guide Line with Blue Gradient */}
+      <div className="absolute left-[15px] top-6 bottom-0 w-[2px] bg-gradient-to-b from-blue-500/50 via-slate-800 to-transparent group-last:hidden" />
+
+      {/* Glowing Timeline Node */}
+      <div className="absolute left-0 top-3 flex items-center justify-center w-8 h-8 rounded-full bg-slate-950 border border-blue-500/60 shadow-[0_0_12px_rgba(59,130,246,0.4)] z-10">
+        <span className="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.9)]" />
       </div>
-      <div>
-        <div className="flex flex-col gap-2 text-sm sm:text-base">
-          <a
-            href={experience.companyUrl}
-            target="_blank"
-            className="text-gray-500 hover:text-emerald-400 transition-colors w-max"
-            rel="noreferrer"
-          >
-            @ {experience.companyName}
-          </a>
-          <h4 className="text-gray-100 font-medium text-base sm:text-lg">
-            {experience.role}
-          </h4>
-          <span className="font-mono text-xs sm:text-sm text-gray-500">
-            {formattedStartDate} · {formattedEndDate} · ({formattedDuration})
-          </span>
-          <div className="text-gray-400 leading-relaxed">
-            <RichText content={experience.description.raw} />
+
+      {/* Glass Card Container */}
+      <div className="rounded-2xl p-6 sm:p-7 bg-slate-900/50 border border-white/[0.08] backdrop-blur-md hover:border-blue-500/40 hover:bg-slate-900/70 hover:shadow-[0_16px_36px_-12px_rgba(0,0,0,0.6),0_0_24px_rgba(59,130,246,0.18)] transition-all duration-300">
+        {/* Header: Company, Role & Date */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+          <div className="flex items-center gap-3.5">
+            {experience.companyLogo?.url && (
+              <div className="rounded-xl p-1 bg-slate-800/80 border border-white/10 shrink-0 shadow-sm">
+                <Image
+                  src={experience.companyLogo.url}
+                  width={42}
+                  height={42}
+                  className="rounded-lg object-cover"
+                  alt={experience.companyName}
+                />
+              </div>
+            )}
+            <div>
+              <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-sky-300 transition-colors">
+                {experience.role}
+              </h3>
+              <a
+                href={experience.companyUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-sky-400 hover:text-sky-300 transition-colors"
+              >
+                <span>@{experience.companyName}</span>
+                <FiExternalLink size={12} />
+              </a>
+            </div>
+          </div>
+
+          {/* Date & Status Pills */}
+          <div className="flex flex-wrap items-center gap-2">
+            {isCurrent && (
+              <span className="font-mono text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-500/20 text-sky-300 border border-blue-500/40 shadow-[0_0_10px_rgba(59,130,246,0.25)]">
+                Atualmente
+              </span>
+            )}
+            <span className="font-mono text-xs text-slate-300 flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800/70 border border-white/10">
+              <FiCalendar size={12} className="text-sky-400" />
+              <span>
+                {formattedStartDate} — {formattedEndDate} · ({formattedDuration})
+              </span>
+            </span>
           </div>
         </div>
 
-        <p className="text-gray-300 text-sm mb-3 mt-6 font-medium">
-          Competências
-        </p>
-        <div className="flex gap-x-2 gap-y-3 flex-wrap lg:max-w-[380px] mb-10">
-          {experience.technologies.map((tech) => (
-            <TechBadge
-              key={`experience-${experience.companyName}-tech-${tech.name}`}
-              name={tech.name}
-            />
-          ))}
+        {/* Description */}
+        <div className="text-slate-300 text-sm sm:text-base leading-relaxed my-4 space-y-2">
+          <RichText content={experience.description.raw} />
         </div>
+
+        {/* Technologies */}
+        {experience.technologies && experience.technologies.length > 0 && (
+          <div className="pt-3 border-t border-white/[0.06] mt-4 flex gap-2 flex-wrap">
+            {experience.technologies.map((tech) => (
+              <TechBadge
+                key={`experience-${experience.companyName}-tech-${tech.name}`}
+                name={tech.name}
+                size="sm"
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

@@ -2,8 +2,12 @@ import localFont from 'next/font/local'
 import { ReactNode } from 'react'
 import './globals.css'
 
+import Footer from './components/footer'
 import ContactForm from './components/contact-form'
 import AppToaster from './components/toaster'
+import ScrollProgress from './components/scroll-progress'
+import BackgroundEffects from './components/background-effects'
+import BackToTop from './components/back-to-top'
 
 const inter = localFont({
   src: [
@@ -47,9 +51,13 @@ const plexMono = localFont({
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR" className={`${inter.variable} ${plexMono.variable}`}>
-      <body className="font-sans">
-        {children}
+      <body className="font-sans relative selection:bg-blue-500/30 selection:text-sky-100">
+        <ScrollProgress />
+        <BackgroundEffects />
+        <main className="relative z-10">{children}</main>
         <ContactForm />
+        <Footer />
+        <BackToTop />
         <AppToaster />
       </body>
     </html>
